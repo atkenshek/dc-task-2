@@ -3,9 +3,9 @@
 
 2nd task prepared by Temirzhanov Meiram Sopy, IT-2001
 
+Developed multi-threaded web server.
+
 The app defines following commands:
-
-
 
 | Method | URL | Description | 
 | ------ | --- | ----------- |  
@@ -25,4 +25,22 @@ The app defines following commands:
 **Example of benchmark command:** 
 ```bash
  hey -n 50 -c 50 -t 0 http://localhost:8080/exec/params
+```
+
+```java
+Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Processor proc = new Processor(socket, request);
+                        try {
+                            Thread.sleep(100);
+                            proc.process();
+                        } catch (IOException | InterruptedException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                });
+
+                t.start();
 ```
